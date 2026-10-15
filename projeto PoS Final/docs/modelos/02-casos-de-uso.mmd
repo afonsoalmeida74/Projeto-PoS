@@ -1,0 +1,18 @@
+flowchart LR
+  op["Operador autenticado"]
+  subgraph pos["Moto PoS"]
+    auth([Iniciar / terminar sessão])
+    inventory([Registar e consultar motas])
+    customer([Registar e consultar clientes])
+    sell([Registar venda de uma mota])
+    dashboard([Consultar resumo])
+    history([Consultar vendas])
+    receipt([Abrir comprovativo interno])
+  end
+  op --> auth
+  op --> inventory
+  op --> customer
+  op --> sell
+  op --> dashboard
+  op --> history
+  op --> receipt

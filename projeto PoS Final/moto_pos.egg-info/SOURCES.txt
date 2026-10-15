@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+moto_pos/__init__.py
+moto_pos/__main__.py
+moto_pos/app.py
+moto_pos/config.py
+moto_pos/db.py
+moto_pos.egg-info/PKG-INFO
+moto_pos.egg-info/SOURCES.txt
+moto_pos.egg-info/dependency_links.txt
+moto_pos.egg-info/requires.txt
+moto_pos.egg-info/top_level.txt
+tests/test_pos.py

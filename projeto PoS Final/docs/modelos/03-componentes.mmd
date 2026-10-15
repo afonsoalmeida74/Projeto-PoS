@@ -1,0 +1,9 @@
+flowchart TB
+  browser["Browser / formulários"] --> templates["Templates Jinja + public/style.css"]
+  templates --> routes["moto_pos/app.py — rotas Flask"]
+  routes --> security["Sessão, login_required e CSRF"]
+  routes --> validation["Validação de campos e dinheiro"]
+  routes --> dbapi["moto_pos/db.py — DatabaseConnection"]
+  dbapi --> sqlite["sqlite3 — ficheiro local"]
+  dbapi --> psycopg["psycopg — PostgreSQL"]
+  dbapi --> schema["Esquema e bootstrap idempotente"]

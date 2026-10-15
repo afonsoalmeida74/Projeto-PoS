@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Nova venda · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Caixa</p><h1>Registar venda</h1><p class="muted">A venda marca a mota como vendida de forma atómica.</p></div></div>
+{% if motorcycles and customers %}
+<form method="post" class="panel stack narrow">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Mota<select name="motorcycle_id" required><option value="">Selecionar mota…</option>{% for bike in motorcycles %}<option value="{{ bike.id }}">{{ bike.make }} {{ bike.model }} · {{ bike.year }} · {{ format_money(bike.price_cents) }}</option>{% endfor %}</select></label>
+  <label>Cliente<select name="customer_id" required><option value="">Selecionar cliente…</option>{% for customer in customers %}<option value="{{ customer.id }}">{{ customer.name }}</option>{% endfor %}</select></label>
+  <label>Método de pagamento<select name="payment_method" required><option value="">Selecionar…</option><option value="dinheiro">Dinheiro</option><option value="cartao">Cartão (registo manual)</option><option value="transferencia">Transferência</option></select></label>
+  <p class="muted small-text">Não introduza nem guarde dados de cartão nesta aplicação. O pagamento é processado fora do sistema.</p>
+  <div class="form-actions"><button class="button" type="submit">Concluir venda</button><a href="{{ url_for('sales') }}">Cancelar</a></div>
+</form>
+{% else %}<section class="panel"><h2>Faltam dados para vender</h2><p>É necessário ter pelo menos uma mota disponível e um cliente registado.</p><div class="actions"><a href="{{ url_for('motorcycle_new') }}">Adicionar mota</a><a href="{{ url_for('customer_new') }}">Registar cliente</a></div></section>{% endif %}
+{% endblock %}

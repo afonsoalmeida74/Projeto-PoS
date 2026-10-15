@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Iniciar sessão · Moto PoS{% endblock %}
+{% block content %}
+<section class="login-card">
+  <p class="eyebrow">Ponto de venda</p><h1>Iniciar sessão</h1>
+  <form method="post" action="{{ url_for('login') }}" class="stack">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Utilizador<input name="username" required maxlength="80" autocomplete="username" autofocus></label>
+    <label>Palavra-passe<input name="password" type="password" required autocomplete="current-password"></label>
+    <button class="button" type="submit">Entrar</button>
+  </form>
+</section>
+{% endblock %}

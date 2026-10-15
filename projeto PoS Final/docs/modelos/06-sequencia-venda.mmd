@@ -1,0 +1,17 @@
+sequenceDiagram
+  actor Operador
+  participant Browser
+  participant Flask as Flask / sale_new
+  participant DB as SQLite ou PostgreSQL
+  Operador->>Browser: Escolhe mota, cliente e método
+  Browser->>Flask: POST + sessão + token CSRF
+  Flask->>Flask: Autentica e valida entrada
+  Flask->>DB: BEGIN; carregar mota disponível e cliente
+  alt dados válidos e mota disponível
+    Flask->>DB: marcar vendida; inserir venda e auditoria
+    Flask->>DB: COMMIT
+    Flask-->>Browser: redirecionar para comprovativo
+  else dados inválidos / conflito
+    Flask->>DB: ROLLBACK se necessário
+    Flask-->>Browser: mensagem de erro; sem venda
+  end

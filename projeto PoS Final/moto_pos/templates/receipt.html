@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Recibo #{{ sale.id }} · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Venda concluída</p><h1>Recibo #{{ sale.id }}</h1></div><button class="button secondary" onclick="window.print()">Imprimir</button></div>
+<article class="receipt panel">
+  <div class="receipt-top"><div><strong>Moto PoS</strong><p>Documento de venda</p></div><div class="align-right"><strong>#{{ sale.id }}</strong><p>{{ sale.created_at[:16].replace('T', ' ') }} UTC</p></div></div>
+  <hr><h2>Veículo</h2><p><strong>{{ sale.make }} {{ sale.model }}</strong> ({{ sale.year }})</p><p>VIN: <code>{{ sale.vin }}</code></p>
+  <h2>Cliente</h2><p>{{ sale.customer_name }}</p><p>{{ sale.email or '' }} {{ sale.phone or '' }}</p>
+  <hr><div class="receipt-total"><span>Total · {{ sale.payment_method|capitalize }}</span><strong>{{ format_money(sale.total_cents) }}</strong></div>
+  <p class="muted">Registado por {{ sale.username }}. Comprovativo interno; não substitui fatura fiscal.</p>
+</article>
+<p><a href="{{ url_for('sales') }}">← Voltar ao histórico</a></p>
+{% endblock %}

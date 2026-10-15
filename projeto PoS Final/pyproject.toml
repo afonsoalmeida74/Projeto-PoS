@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moto-pos"
+version = "0.1.0"
+description = "Ponto de venda local para um stand de motas usadas e novas"
+requires-python = ">=3.11"
+dependencies = ["Flask>=3.0,<4", "psycopg[binary]>=3.2,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "ruff>=0.6,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [".uv-cache", ".venv"]
+
+[tool.vercel]
+entrypoint = "app:app"
+
+[tool.setuptools.packages.find]
+include = ["moto_pos*"]
+
+[tool.vercel.scripts]
+build = "python build.py"

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Inventário · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Catálogo</p><h1>Inventário</h1><p class="muted">Motas disponíveis e histórico de unidades vendidas.</p></div><a class="button" href="{{ url_for('motorcycle_new') }}">Adicionar mota</a></div>
+<div class="table-wrap"><table><thead><tr><th>Mota</th><th>Ano</th><th>VIN</th><th>Condição</th><th>Preço</th><th>Estado</th></tr></thead><tbody>
+{% for bike in motorcycles %}<tr><td><strong>{{ bike.make }} {{ bike.model }}</strong></td><td>{{ bike.year }}</td><td><code>{{ bike.vin }}</code></td><td>{{ bike.condition|capitalize }}</td><td>{{ format_money(bike.price_cents) }}</td><td><span class="badge {{ bike.status }}">{{ bike.status|capitalize }}</span></td></tr>
+{% else %}<tr><td colspan="6" class="empty">Ainda não existem motas no inventário.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

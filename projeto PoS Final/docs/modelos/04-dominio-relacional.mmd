@@ -1,0 +1,46 @@
+erDiagram
+  USERS ||--o{ SALES : records
+  CUSTOMERS ||--o{ SALES : purchases
+  MOTORCYCLES ||--o| SALES : sold_as
+  USERS ||--o{ AUDIT_LOG : performs
+  USERS {
+    int id PK
+    string username UK
+    string password_hash
+    datetime created_at
+  }
+  MOTORCYCLES {
+    int id PK
+    string make
+    string model
+    int year
+    string vin UK
+    string condition
+    int price_cents
+    string status
+    datetime created_at
+  }
+  CUSTOMERS {
+    int id PK
+    string name
+    string email
+    string phone
+    datetime created_at
+  }
+  SALES {
+    int id PK
+    int motorcycle_id FK_UK
+    int customer_id FK
+    int user_id FK
+    int total_cents
+    string payment_method
+    datetime created_at
+  }
+  AUDIT_LOG {
+    int id PK
+    int user_id FK
+    string action
+    string entity_type
+    int entity_id
+    datetime created_at
+  }

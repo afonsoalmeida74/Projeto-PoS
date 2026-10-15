@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Adicionar mota · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Inventário</p><h1>Adicionar mota</h1></div></div>
+<form method="post" class="panel form-grid">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Marca<input name="make" required maxlength="80" value="{{ request.form.get('make', '') }}"></label>
+  <label>Modelo<input name="model" required maxlength="80" value="{{ request.form.get('model', '') }}"></label>
+  <label>Ano<input name="year" type="number" min="1885" max="2100" required value="{{ request.form.get('year', '') }}"></label>
+  <label>VIN / número de quadro<input name="vin" required minlength="5" maxlength="32" value="{{ request.form.get('vin', '') }}"></label>
+  <label>Condição<select name="condition" required><option value="">Selecionar…</option><option value="nova">Nova</option><option value="usada">Usada</option></select></label>
+  <label>Preço (€)<input name="price" inputmode="decimal" placeholder="0,00" required value="{{ request.form.get('price', '') }}"></label>
+  <div class="form-actions"><button class="button" type="submit">Guardar mota</button><a href="{{ url_for('motorcycles') }}">Cancelar</a></div>
+</form>
+{% endblock %}

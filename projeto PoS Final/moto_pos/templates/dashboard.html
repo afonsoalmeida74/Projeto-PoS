@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Resumo · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Operação</p><h1>Resumo</h1><p class="muted">Estado atual do stand.</p></div><a class="button" href="{{ url_for('sale_new') }}">Registar venda</a></div>
+<section class="stats">
+  <article class="stat"><span>Motas disponíveis</span><strong>{{ stats.available }}</strong><a href="{{ url_for('motorcycles') }}">Ver inventário →</a></article>
+  <article class="stat"><span>Vendas registadas</span><strong>{{ stats.sold }}</strong><a href="{{ url_for('sales') }}">Ver vendas →</a></article>
+  <article class="stat"><span>Volume de vendas</span><strong>{{ format_money(stats.revenue) }}</strong><small>Valor bruto registado</small></article>
+</section>
+<section class="panel"><h2>Começar</h2><p>Registe clientes e motas antes de criar uma venda.</p><div class="actions"><a href="{{ url_for('motorcycle_new') }}">Adicionar mota</a><a href="{{ url_for('customer_new') }}">Registar cliente</a></div></section>
+{% endblock %}

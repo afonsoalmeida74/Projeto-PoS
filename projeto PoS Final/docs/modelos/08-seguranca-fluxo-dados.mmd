@@ -1,0 +1,21 @@
+flowchart LR
+  subgraph untrusted["Zona não confiável — browser do operador"]
+    input["Formulários: cliente, mota, venda"]
+  end
+  subgraph trust["Fronteira da aplicação Moto PoS"]
+    csrf["CSRF + sessão Flask"]
+    validate["Autorização + validação"]
+    app["Rotas e regras de negócio"]
+  end
+  subgraph data["Persistência controlada pelo operador"]
+    store["SQLite local ou PostgreSQL externo"]
+    pii["Nome, email/telefone opcionais"]
+    secrets["Hash de palavra-passe; segredo fora do código"]
+    events["Vendas e auditoria limitada"]
+  end
+  input -->|"HTTP local / HTTPS em produção"| csrf --> validate --> app
+  app --> store
+  store --> pii
+  store --> secrets
+  store --> events
+  input -. "PAN/CVV não recolhidos" .-> out["Pagamento externo ao sistema"]

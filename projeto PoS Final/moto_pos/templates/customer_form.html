@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Novo cliente · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Clientes</p><h1>Registar cliente</h1></div></div>
+<form method="post" class="panel stack narrow">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Nome completo<input name="name" required maxlength="120" value="{{ request.form.get('name', '') }}"></label>
+  <label>Email<input name="email" type="email" maxlength="254" value="{{ request.form.get('email', '') }}"></label>
+  <label>Telefone<input name="phone" type="tel" maxlength="40" value="{{ request.form.get('phone', '') }}"></label>
+  <div class="form-actions"><button class="button" type="submit">Guardar cliente</button><a href="{{ url_for('customers') }}">Cancelar</a></div>
+</form>
+{% endblock %}

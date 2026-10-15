@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Vendas · Moto PoS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Histórico</p><h1>Vendas</h1></div><a class="button" href="{{ url_for('sale_new') }}">Nova venda</a></div>
+<div class="table-wrap"><table><thead><tr><th>N.º</th><th>Data (UTC)</th><th>Mota</th><th>Cliente</th><th>Pagamento</th><th>Total</th><th></th></tr></thead><tbody>
+{% for sale in sales %}<tr><td>#{{ sale.id }}</td><td>{{ sale.created_at[:16].replace('T', ' ') }}</td><td>{{ sale.make }} {{ sale.model }}</td><td>{{ sale.customer_name }}</td><td>{{ sale.payment_method|capitalize }}</td><td><strong>{{ format_money(sale.total_cents) }}</strong></td><td><a href="{{ url_for('sale_receipt', sale_id=sale.id) }}">Recibo</a></td></tr>
+{% else %}<tr><td colspan="7" class="empty">Ainda não existem vendas.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,17 @@
+flowchart LR
+  operador[Operador do stand]
+  browser[Navegador]
+  subgraph app["Moto PoS — aplicação web"]
+    web["Flask: rotas e casos de uso"]
+    templates["Templates Jinja e CSS"]
+    security["Sessão, CSRF e validação"]
+  end
+  sqlite[("SQLite — local")]
+  pg[("PostgreSQL — remoto, por configurar")]
+  operador --> browser
+  browser <-->|"HTTP local / HTTPS no alvo"| web
+  web --> templates
+  web --> security
+  web -->|"modo local"| sqlite
+  web -->|"modo remoto suportado"| pg
+  web -. "não integra" .-> payment["Gateway de pagamento"]

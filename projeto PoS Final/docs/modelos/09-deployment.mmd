@@ -1,0 +1,12 @@
+flowchart TB
+  subgraph local["Atual — desenvolvimento local"]
+    user1["Operador"] --> browser1["Browser"] --> flask1["Flask dev server"] --> sqlite1[("SQLite em instance/")]
+    static1["public/style.css"] --> browser1
+  end
+  subgraph target["Alvo — não verificado"]
+    user2["Operador"] -->|HTTPS| edge["Vercel Function: app.py"]
+    edge --> pg[("PostgreSQL externo persistente")]
+    static2["public/ servido pela Vercel"] --> browser2["Browser"]
+  end
+  warning["Requer DATABASE_URL, segredos, base provisionada, build e teste de integração"]
+  warning -.-> target

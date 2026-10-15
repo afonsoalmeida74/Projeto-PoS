@@ -1,0 +1,13 @@
+flowchart TD
+  start((Início)) --> auth{Sessão autenticada?}
+  auth -- não --> login[Redirecionar para login]
+  auth -- sim --> select[Selecionar mota, cliente e pagamento]
+  select --> csrf{Token CSRF válido?}
+  csrf -- não --> reject[Rejeitar pedido]
+  csrf -- sim --> valid{Dados válidos e mota disponível?}
+  valid -- não --> error[Mostrar erro; manter stock]
+  valid -- sim --> tx[Transação: atualizar stock + venda + auditoria]
+  tx --> commit{Commit bem-sucedido?}
+  commit -- não --> rollback[Rollback integral]
+  rollback --> error
+  commit -- sim --> receipt[Mostrar comprovativo interno]

@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: moto-pos
+Version: 0.1.0
+Summary: Ponto de venda local para um stand de motas usadas e novas
+Requires-Python: >=3.11
+Requires-Dist: Flask<4,>=3.0
+Requires-Dist: psycopg[binary]<4,>=3.2
+Provides-Extra: dev
+Requires-Dist: pytest<9,>=8; extra == "dev"
+Requires-Dist: ruff<1,>=0.6; extra == "dev"

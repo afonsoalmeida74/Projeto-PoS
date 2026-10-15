@@ -1,0 +1,6 @@
+stateDiagram-v2
+  [*] --> Disponivel : registo válido
+  Disponivel --> Vendida : venda confirmada / commit
+  Disponivel --> Disponivel : venda falha / rollback
+  Vendida --> [*]
+  note right of Vendida : Sem reversão na versão atual
